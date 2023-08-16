@@ -24,19 +24,9 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-lottie_coding = load_lottiefile("95714-hello-orange.json")
 lottie_hello = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_kAhPVOiVD5.json")
 
-st_lottie(
-    lottie_coding,
-    speed=1,
-    reverse=False,
-    loop=True,
-    quality="low",
-    height=None,
-    width=None,
-    key=None,
-)
+
 
 with st.container():    
     st.markdown(
@@ -49,7 +39,16 @@ with st.container():
     col1, col2, col3 = st.columns([10,10,10])
 
     with col1:
-        st.write(' ')
+        st_lottie(
+            lottie_hello,
+            speed=1,
+            reverse=False,
+            loop=True,
+            quality="low",
+            height=100,
+            width=100,
+            key=None,
+        )
 
     with col2:
         st.image("logo/android-chrome-512x512.png", width=250)
