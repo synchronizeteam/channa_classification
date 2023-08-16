@@ -5,8 +5,8 @@ import os
 
 from torchvision import transforms
 from PIL import Image
-from modeltrained import ResNet
-from rekomendasi import andrao, asiatica, auranti, barca, maru, stewartii
+from modeltrained import ResNet18
+from rekomendasi import andrao, asiatica, auranti, barca, bukan_channa, limbata, maru, stewartii
 
 st.set_page_config(
     page_title="Channa Classification",
@@ -15,7 +15,7 @@ st.set_page_config(
 
 torch.manual_seed(128)
 # Define the class names
-class_names = ['Andrao', 'Asiatica', 'Auranti', 'Barca', 'Maru', 'Stewartii']
+class_names = ['Andrao', 'Asiatica', 'Auranti', 'Barca', 'Bukan Channa', 'Limbata', 'Maru', 'Stewartii']
 
 # Define the transformation
 transform = transforms.Compose([
@@ -26,8 +26,8 @@ transform = transforms.Compose([
 
 # Load the model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-state_dict = torch.load('ResNetV9.pt', map_location=device)
-model = ResNet()
+state_dict = torch.load('ResNet18New2.pt', map_location=device)
+model = ResNet18()
 model.load_state_dict(state_dict)
 model = model.to(device)
 model.eval()
@@ -92,6 +92,12 @@ def main():
             elif predicted_label == "Stewartii":
                 st.write("<h2 style='text-align: center; color: orange;'>Rekomendasi toko</h2>", unsafe_allow_html=True)             
                 stewartii(predicted_label)
+            elif predicted_label == "Limbata":
+                st.write("<h2 style='text-align: center; color: orange;'>Rekomendasi toko</h2>", unsafe_allow_html=True)             
+                limbata(predicted_label)
+            elif predicted_label == "Bukan Channa":
+                st.write("<h2 style='text-align: center; color: orange;'>Rekomendasi toko</h2>", unsafe_allow_html=True)             
+                bukan_channa(predicted_label)
             else:
                 st.info(f"Hasil prediksi: Tidak diketahui")
           

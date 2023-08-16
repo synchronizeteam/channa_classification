@@ -3,6 +3,8 @@ import os
 from PIL import Image
 import glob
 import datetime
+from streamlit_autorefresh import st_autorefresh
+
 
 st.set_page_config(
     page_title="Channa Classification",
@@ -60,7 +62,7 @@ def main():
             
             with st.container():
                 # Display the image and prediction
-                col1, col2, col3, col4 = st.columns([1, 4, 4, 2])
+                col1, col2, col3, col4 = st.columns([1, 4, 4, 6])
                 
                 with col1:
                     st.write(i+1)  # Display the row number
@@ -77,6 +79,9 @@ def main():
                 with col4:
                     if st.button(f"❌", key=f"remove_{image_file}"):
                         remove_files(image_file, prediction_file)
+                        
+                        
+                        
 
 def crop_image(image, target_width, target_height):
     width, height = image.size
@@ -109,6 +114,10 @@ def remove_files(image_file, prediction_file):
         os.remove(image_file)
     if os.path.exists(prediction_file):
         os.remove(prediction_file)
+    st.success("Data berhasil dihapus")
+    # st.experimental_rerun()
+    st_autorefresh(interval=2000)
+    
 
 
 if __name__ == "__main__":

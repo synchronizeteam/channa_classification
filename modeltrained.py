@@ -16,9 +16,9 @@ import os
 
 torch.manual_seed(128)
 
-class ResNet(nn.Module):
-    def __init__(self, num_classes=6):
-        super(ResNet, self).__init__()
+class ResNet18(nn.Module):
+    def __init__(self, num_classes=8):
+        super(ResNet18, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
